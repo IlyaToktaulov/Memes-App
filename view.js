@@ -4,6 +4,8 @@ class View {
         this.previewBottomTextNode = document.querySelector('.js-bottom-text');
         this.previewImageNode = document.querySelector('.js-image');
         this.settingsSelectNode = document.querySelector('.js-memes-select');
+
+        this.settingsSelectNode.addEventListener('change', this._handleSelectChange)
     }
 
     renderPreview(preview) {
@@ -35,5 +37,11 @@ class View {
 
             this.settingsSelectNode.appendChild(optionNode)
         });
+    }
+
+    _handleSelectChange = (event) => {
+        const id = this.settingsSelectNode.value;
+        
+        this.onMemeChange(id);
     }
 }

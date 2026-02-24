@@ -1,5 +1,5 @@
 const PREVIEW_MOCK = {
-    url: 'https://i.imgflip.com/1g8my4.jpg',
+    url: '',
     textTop: 'Верхняя подпись',
     textBottom: 'Нижняя подпись'
 }
@@ -18,14 +18,21 @@ class Model {
 
     setMemes(memes) {
         this.memes = memes;
-        this.currentMemeId = memes[0].id;
     }
-
-    getCurrentMemId() {
+    
+    getCurrentMemeId() {
         return this.currentMemeId;
+    }
+    
+    setCurrentMemeId(currentMemeId) {
+        this.currentMemeId = currentMemeId;
     }
 
     getPreview() {
         return this.preview;
+    }
+
+    getCurrentMeme() {
+        return this.memes[this.getCurrentMemeId]
     }
 }
