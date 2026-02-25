@@ -3,9 +3,11 @@ class Controller {
         this.model = new Model({
             onCurrentMemeIdChange: this.handleModelCurrentMemeIdChange
         });
+
         this.view = new View({
-            onMemeChange: this.handleMemeChange
+            onMemeChange: this.handleViewMemeChange
         });
+
         this.api = new API();
     }
 
@@ -21,7 +23,7 @@ class Controller {
         this.view.renderMemesSelect(this.model.getMemes(), this.model.getCurrentMemeId());
     }
 
-    handleMemeChange = (id) => {
+    handleViewMemeChange = (id) => {
         this.model.setCurrentMemeId(id);
     }
 

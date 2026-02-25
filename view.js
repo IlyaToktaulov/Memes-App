@@ -1,11 +1,12 @@
 class View {
     constructor({onMemeChange}) {
-        this.onMemeChange = onMemeChange;
         this.previewTopTextNode = document.querySelector('.js-top-text');
         this.previewBottomTextNode = document.querySelector('.js-bottom-text');
         this.previewImageNode = document.querySelector('.js-image');
         this.settingsSelectNode = document.querySelector('.js-memes-select');
-
+        
+        this.onMemeChange = onMemeChange;
+        
         this.settingsSelectNode.addEventListener('change', this._handleSelectChange)
     }
 
