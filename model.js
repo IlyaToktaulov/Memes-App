@@ -1,15 +1,16 @@
 const PREVIEW_MOCK = {
-    url: '',
     textTop: 'Верхняя подпись',
     textBottom: 'Нижняя подпись'
 }
 
 
 class Model {
-    constructor() {
+    constructor({onCurrentMemeIdChange}) {
         this.memes = [];
         this.currentMemeId = null;
         this.preview = PREVIEW_MOCK;
+
+        this.onCurrentMemeIdChange = onCurrentMemeIdChange;
     }
 
     getMemes() {
@@ -26,6 +27,8 @@ class Model {
     
     setCurrentMemeId(currentMemeId) {
         this.currentMemeId = currentMemeId;
+        
+        this.onCurrentMemeIdChange();
     }
 
     getPreview() {
@@ -33,6 +36,14 @@ class Model {
     }
 
     getCurrentMeme() {
-        return this.memes[this.getCurrentMemeId]
+        let currentMeme = null;
+
+        this.memes.forEach(meme => {
+            if (meme.id === this.getCurrentMemeId()) {
+                currentMeme = meme;
+            }
+        });
+
+        return currentMeme;
     }
 }

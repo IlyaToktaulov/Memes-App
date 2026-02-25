@@ -1,5 +1,6 @@
 class View {
-    constructor() {
+    constructor({onMemeChange}) {
+        this.onMemeChange = onMemeChange;
         this.previewTopTextNode = document.querySelector('.js-top-text');
         this.previewBottomTextNode = document.querySelector('.js-bottom-text');
         this.previewImageNode = document.querySelector('.js-image');
@@ -39,9 +40,9 @@ class View {
         });
     }
 
-    _handleSelectChange = (event) => {
+    _handleSelectChange = () => {
         const id = this.settingsSelectNode.value;
-        
+
         this.onMemeChange(id);
     }
 }
