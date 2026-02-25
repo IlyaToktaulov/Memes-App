@@ -5,12 +5,16 @@ const PREVIEW_MOCK = {
 
 
 class Model {
-    constructor({onCurrentMemeIdChange}) {
+    constructor({
+        onCurrentMemeIdChange,
+        onMemesChange
+    }) {
         this.memes = [];
         this.currentMemeId = null;
         this.preview = PREVIEW_MOCK;
 
         this.onCurrentMemeIdChange = onCurrentMemeIdChange;
+        this.onMemesChange = onMemesChange;
     }
 
     getMemes() {
@@ -19,6 +23,10 @@ class Model {
 
     setMemes(memes) {
         this.memes = memes;
+        this.currentMemeId = memes[0].id;
+
+        this.onMemesChange();
+        this.onCurrentMemeIdChange();
     }
     
     getCurrentMemeId() {
