@@ -2,20 +2,21 @@ class Controller {
     constructor() {
         this.model = new Model({
             onMemesChange: this.handleModelMemesChange,
-            onCurrentMemeIdChange: this.handleModelCurrentMemeIdChange
+            onCurrentMemeIdChange: this.handleModelCurrentMemeIdChange,
+            onTextTopChange: this.handleModelTextTopChange,
+            onTextBottomChange: this.handleModelTextBottomChange,
         });
 
         this.view = new View({
-            onMemeChange: this.handleViewMemeChange
+            onMemeChange: this.handleViewMemeChange,
+            onTextTopChange: this.handleViewTextTopChange,
+            onTextBottomChange: this.handleViewTextBottomChange,
         });
 
         this.api = new API();
     }
 
     init() {
-        const preview = this.model.getPreview();
-        this.view.renderPreview(preview);
-
         const memes = this.api.getMemes();
 
         this.model.setMemes(memes);
@@ -34,6 +35,22 @@ class Controller {
             ...this.model.getPreview(),
             url: this.model.getCurrentMeme().url
         }
-        this.view.renderPreview(preview);
+        this.view.renderPreview(this.model.getPreview());
+    }
+
+    handleViewTextTopChange = (text) => {
+        this.model.setTextTop(text);
+    }
+
+    handleViewTextBottomChange = (text) => {
+        this.model.setTextBottom(text);
+    }
+
+    handleModelTextTopChange = () => {
+        this.view.renderPreview(this.model.getPreview());
+    }
+
+    handleModelTextBottomChange = () => {
+        this.view.renderPreview(this.model.getPreview());
     }
 }

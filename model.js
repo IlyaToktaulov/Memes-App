@@ -1,20 +1,27 @@
-const PREVIEW_MOCK = {
-    textTop: 'Верхняя подпись',
-    textBottom: 'Нижняя подпись'
-}
-
-
 class Model {
     constructor({
         onCurrentMemeIdChange,
-        onMemesChange
+        onMemesChange,
+        onTextTopChange,
+        onTextBottomChange,
     }) {
         this.memes = [];
         this.currentMemeId = null;
-        this.preview = PREVIEW_MOCK;
+        this.textTop = '';
+        this.textBottom = '';
 
         this.onCurrentMemeIdChange = onCurrentMemeIdChange;
         this.onMemesChange = onMemesChange;
+        this.onTextTopChange = onTextTopChange;
+        this.onTextBottomChange = onTextBottomChange;
+    }
+
+    getPreview() {
+        return {
+            textTop: this.textTop,
+            textBottom: this.textBottom,
+            url: this.getCurrentMeme().url
+        };
     }
 
     getMemes() {
@@ -28,6 +35,18 @@ class Model {
         this.onMemesChange();
         this.onCurrentMemeIdChange();
     }
+
+    setTextTop(text) {
+        this.textTop = text;
+
+        this.onTextTopChange();
+    }
+
+    setTextBottom(text) {
+        this.textBottom = text;
+
+        this.onTextBottomChange();
+    }
     
     getCurrentMemeId() {
         return this.currentMemeId;
@@ -39,9 +58,6 @@ class Model {
         this.onCurrentMemeIdChange();
     }
 
-    getPreview() {
-        return this.preview;
-    }
 
     getCurrentMeme() {
         let currentMeme = null;
