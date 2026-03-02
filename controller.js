@@ -19,7 +19,7 @@ class Controller {
     init() {
         this.api.getMemes()
             .then(data => {
-                const memes = data.data.memes;
+                const memes = data.data.memes.slice(0, 100);
                 this.model.setMemes(memes);
             });
     }
@@ -41,11 +41,13 @@ class Controller {
     }
 
     handleViewTextTopChange = (text) => {
-        this.model.setTextTop(text);
+        // Проверка количества символов
+        this.model.setTextTop(text.slice(0, 40));
     }
 
     handleViewTextBottomChange = (text) => {
-        this.model.setTextBottom(text);
+        // Проверка количества символов
+        this.model.setTextBottom(text.slice(0, 40));
     }
 
     handleModelTextTopChange = () => {
