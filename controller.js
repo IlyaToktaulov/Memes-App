@@ -17,9 +17,11 @@ class Controller {
     }
 
     init() {
-        const memes = this.api.getMemes();
-
-        this.model.setMemes(memes);
+        this.api.getMemes()
+            .then(data => {
+                const memes = data.data.memes;
+                this.model.setMemes(memes);
+            });
     }
 
     handleModelMemesChange = () => {
